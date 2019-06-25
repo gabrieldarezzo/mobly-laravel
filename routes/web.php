@@ -11,6 +11,12 @@
 |
 */
 
+
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('users', 'UserController');
+Route::resource('address', 'AddressController');
+Route::resource('company', 'CompanyController');
