@@ -12,13 +12,8 @@
 */
 
 
-
-Route::get('/', function () {
-    return '<hr> You should read <a href="https://github.com/gabrieldarezzo/mobly-private/">README.md</a>, make with S2';
-});
-
-
-
+// You should read README.md, made with S2
+Route::get('/', 'UserController@index');
 Route::get('user/new', 'UserController@new');
 Route::resource('users', 'UserController');
 
