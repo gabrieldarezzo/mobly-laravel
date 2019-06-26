@@ -12,7 +12,9 @@ class AddressTableSeeder extends Seeder
     public function run()
     {
 
-        $usersData = json_decode(\Illuminate\Support\Facades\Storage::get('users.json'), true);
+        
+        // http://jsonplaceholder.typicode.com/users
+        $usersData = json_decode(\Illuminate\Support\Facades\Storage::get('json/users.json'), true);
 
         $address = [];
         foreach($usersData as $row) {

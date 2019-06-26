@@ -14,9 +14,14 @@
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return '<hr> You should read <a href="https://github.com/gabrieldarezzo/mobly-private/">README.md</a>, make with S2';
 });
 
+
+
+Route::get('user/new', 'UserController@new');
 Route::resource('users', 'UserController');
-Route::resource('address', 'AddressController');
-Route::resource('company', 'CompanyController');
+
+// Route::resource('address', 'AddressController');
+// Route::resource('company', 'CompanyController');
+// Route::resource('posts', 'PostController');

@@ -1,4 +1,46 @@
-## Installation in Local
+# Teste Mobly `teste-programador-php`:
+
+Referência:  
+`https://github.com/mobly/teste-programador-php/tree/master/teste-api` 
+
+TL;DR:   
+
+
+* "Importe usuários e posts de uma API e guarde em um banco de dados MySQL"   
+
+Feito no ato do migration -> `Install in Local`
+
+* "Possuir uma tela para listar os usuários, com ações de adicionar, editar e excluir"  
+
+O CRUD pode se acessado da URL: `http://localhost:8000/users`
+![Listagem de Usuarios](doc/exemplo.png)  
+
+
+Onde possui os botões: `Adicionar`  
+![Btn Plus](doc/btn-plus.png)  
+
+Exibir `detalhes do Usuario` e `Posts` do mesmo, `Editar` e `Excluir`  
+![Btns Show Info/Posts, Edit, Delete](doc/btn-read_edit_delete.png)  
+
+
+
+* "Tenha APIs que retornem os dados do banco de dados no formato JSON"  
+
+No caso preferi separar a url:  
+
+```
+(Listar todos os Usuarios em Json)
+http://localhost:8000/api/users
+
+(Listar todos os Posts do Usuario em Json)
+http://localhost:8000/api/users/{id}/posts
+```
+Como pode ser visto no arquivo: `routes/api.php` 
+
+
+
+
+## Install in Local
 
 ```bash
 git clone URL `https://github.com/gabrieldarezzo/mobly-private.git` mobly
@@ -9,12 +51,29 @@ Create a database:
 ```sql
 CREATE DATABASE mobly COLLATE 'utf8_general_ci';
 ```
--> Set this base in your `.env`
+-> Set this base in your `.env`, like this:
+```
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://localhost:8000
+
+LOG_CHANNEL=stack
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=mobly
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+
 
 ```bash
 composer install
 php artisan key:generate
-php artisan jwt:secret
 php artisan config:clear
 php artisan config:cache
 php artisan serve
@@ -54,24 +113,25 @@ Ps: `192.168.11` === IPv4 ok?!
 
 
 ##  /Migration/Model/Seeder/Factory':
+Glue 4Developers 
 ```shell
 php artisan make:migration create_company_table --create=company --table=company
-php artisan make:model Company
-php artisan make:seeder CompanyTableSeeder
-php artisan make:controller CompanyController
+php artisan make:model Post
+php artisan make:seeder PostsTableSeeder
+php artisan make:controller PostController
 ```
 
-Ps: Don't forget add in `DatabaseSeeder.php` 
+Ps: Don't forget add in `DatabaseSeeder.php` ;-)
 ```php
 $this->call(TemasTableSeeder::class);
 ```
 
-Não esquece dentro de `routes/api.php`, adicionar o resource, para o CRUD ficar BALA.
+In `routes/api.php`, Add your resource, for CRUD if you want use superTrait ^^ 
 ```php
 Route::resource('action', 'ActionController');
 ``` 
 
-Ps: It's good run this if composer error after `git pull` :
+Ps: It's good run this if composer command `git pull` if your anyone has add:
 ```shell
 composer dump-autoload
 ```

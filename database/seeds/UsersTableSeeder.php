@@ -23,7 +23,9 @@ class UsersTableSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
         */
-        $json = json_decode(\Illuminate\Support\Facades\Storage::get('users.json'), true);
+
+        // http://jsonplaceholder.typicode.com/users
+        $json = json_decode(\Illuminate\Support\Facades\Storage::get('json/users.json'), true);
         foreach($json as $row) {
             unset($row['address']);
             unset($row['company']);
